@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import Input from "../../components/Input/Input";
-import {ReactComponent as Background} from '../../assets/images/blabla 2.svg';
+import bg from '../../assets/images/photo_2023-03-19_18-09-11.png';
 
 import style from './SearchTrip.module.css'
 import Button from "../../components/Button/Button";
@@ -11,7 +11,7 @@ const SearchTrip:FC = () => {
 
     return (
         <div className={style.content}>
-            <Background className={style.backgroundImg}/>
+            <img src={bg} className={style.backgroundImg}/>
         <div className={style.inputButton}>
 <Input input={firstInput} setInput={setFirstInput} placeholder={'Откуда'}/>
             <Input input={secondInput} setInput={setSecondInput} placeholder={'Куда'}/>
