@@ -7,3 +7,19 @@ background-color: #F9FAF5;
     margin: 16px 200px 0 0
 }
 
+.sider {
+    background-color:  #1D7074 !important;
+}
+
+.menu {
+    background-color:  #1D7074 !important;
+}
+
+.footer {
+   display: flex;
+    align-items: center;
+    background-color: #006064;
+    height: 48px;
+    justify-content: center;
+
+}

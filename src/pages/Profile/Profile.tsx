@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 
 import style from './Profile.module.css'
-import Button from "../../components/Button/Button";
+
 
 const Profile:FC = () => {
     return (

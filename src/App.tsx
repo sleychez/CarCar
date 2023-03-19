@@ -42,18 +42,17 @@ const items: MenuItem[] = [
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
-    token: { colorBgContainer },
   } = theme.useToken();
 
   return (
       <BrowserRouter>
       <Layout style={{ minHeight: '100vh' }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <Sider className={style.sider} collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
           <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)' }} />
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+          <Menu className={style.menu} theme="light" defaultSelectedKeys={['1']} mode='inline' items={items} />
         </Sider>
         <Layout className="site-layout">
-          <Header style={{ padding: 0, background: colorBgContainer }} />
+          <Header style={{backgroundColor: '#006064' }} />
           <Content className={style.content}>
             <Routes>
               <Route path='/searchTrip/*'
@@ -64,7 +63,7 @@ const App: React.FC = () => {
                      element={<MyTrips/>}/>
             </Routes>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
+          <Footer className={style.footer}>CarCar ©2023</Footer>
         </Layout>
       </Layout>
           </BrowserRouter>

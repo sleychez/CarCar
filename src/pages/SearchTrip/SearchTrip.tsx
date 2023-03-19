@@ -6,14 +6,15 @@ import style from './SearchTrip.module.css'
 import Button from "../../components/Button/Button";
 
 const SearchTrip:FC = () => {
-    const [input, setInput] = useState("");
+    const [firstInput, setFirstInput] = useState("");
+    const [secondInput, setSecondInput] = useState("");
 
     return (
         <div className={style.content}>
             <Background className={style.backgroundImg}/>
         <div className={style.inputButton}>
-<Input input={input} setInput={setInput} placeholder={'Откуда'}/>
-            <Input input={input} setInput={setInput} placeholder={'Куда'}/>
+<Input input={firstInput} setInput={setFirstInput} placeholder={'Откуда'}/>
+            <Input input={secondInput} setInput={setSecondInput} placeholder={'Куда'}/>
             <Button text={'Найти'}/>
         </div>
         </div>
