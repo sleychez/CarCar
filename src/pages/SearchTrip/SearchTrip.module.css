@@ -1,0 +1,18 @@
+.inputButton {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.backgroundImg {
+
+
+}
+
+.content {
+display: flex;
+    justify-content: center;
+align-items: center;
+    flex-direction: column;
+
+}
