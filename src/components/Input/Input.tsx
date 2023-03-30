@@ -3,22 +3,23 @@ import React, {FC} from 'react';
 import style from './Input.module.css'
 
 type InputProps = {
-    input: string | number;
-    setInput: (value: string) => void;
+    value?: string | number;
+    setValue: (value: string) => void;
     disabled?: boolean;
     type?: React.HTMLInputTypeAttribute;
-placeholder?: string
+placeholder?: string;
+onChange?: (e: any) => void
 };
 
 
-const Input: FC<InputProps> = ({ input, setInput, disabled, type,placeholder }) => {
+const Input: FC<InputProps> = ({ value, setValue, disabled, type,placeholder }) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInput(event.target.value);
+        setValue(event.target.value);
     };
     return (
         <input className={style.input}
             type={type}
-            value={input}
+            value={value}
             onChange={handleChange}
             disabled={disabled}
                placeholder={placeholder}

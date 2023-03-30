@@ -3,7 +3,9 @@ import React, {FC} from 'react';
 import style from './Profile.module.css'
 
 
+
 const Profile:FC = () => {
+
     return (
         <div>
 <div className={style.profileInfo}>

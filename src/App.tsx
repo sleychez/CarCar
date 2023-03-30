@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   CarOutlined,
   SearchOutlined,
@@ -12,8 +12,15 @@ import Profile from "./pages/Profile/Profile";
 import MyTrips from "./pages/MyTrips/MyTrips";
 import {ReactComponent as Logo} from "../src/assets/images/logo.svg";
 import style from './App.module.css'
-const { Header, Content, Footer, Sider } = Layout;
+import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
+import {Header} from "./components/Header/Header";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
+import {useAppDispatch} from "./hooks/useAppDispatch";
+import {getMe} from "./redux/features/auth/authSlice";
 
+const { Content, Footer, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -38,6 +45,13 @@ const items: MenuItem[] = [
 ];
 
 const App: React.FC = () => {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(getMe())
+  }, [dispatch])
+
+
   const [collapsed, setCollapsed] = useState(false);
   const {
   } = theme.useToken();
@@ -47,10 +61,10 @@ const App: React.FC = () => {
       <Layout style={{ minHeight: '100vh' }}>
         <Sider className={style.sider} collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
           <Logo className={style.logo}/>
-          <Menu className={style.menu} theme="light" defaultSelectedKeys={['1']} mode='inline' items={items} />
+          <Menu className={style.menu} theme="light"  mode='inline' items={items} />
         </Sider>
         <Layout className="site-layout">
-          <Header style={{backgroundColor: '#006064' }} />
+         <Header/>
           <Content className={style.content}>
             <Routes>
               <Route path='/searchTrip/*'
@@ -59,7 +73,14 @@ const App: React.FC = () => {
                      element={<Profile/>}/>
               <Route path='/myTrips/*'
                      element={<MyTrips/>}/>
+              <Route path='/register/*'
+                     element={<Register/>}/>
+              <Route path='/login/*'
+                     element={<Login/>}/>
+              <Route path="/"
+                     element={<Navigate to={'/login'}/>}/>
             </Routes>
+            <ToastContainer position='bottom-right'/>
           </Content>
           <Footer className={style.footer}>CarCar ©2023</Footer>
         </Layout>

@@ -13,8 +13,8 @@ const SearchTrip:FC = () => {
         <div className={style.content}>
             <img src={bg} className={style.backgroundImg}/>
         <div className={style.inputButton}>
-<Input input={firstInput} setInput={setFirstInput} placeholder={'Откуда'}/>
-            <Input input={secondInput} setInput={setSecondInput} placeholder={'Куда'}/>
+<Input value={firstInput} setValue={setFirstInput} placeholder={'Откуда'}/>
+            <Input value={secondInput} setValue={setSecondInput} placeholder={'Куда'}/>
             <Button text={'Найти'}/>
         </div>
         </div>
