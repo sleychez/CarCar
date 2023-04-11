@@ -43,7 +43,7 @@ const Login: FC = () => {
     }
 
 
-    return <form
+    return <form style={{margin: '150px auto',}}
         onSubmit={(e) => e.preventDefault()}
         className={style.form}>
 <h1 className={style.h1}>Авторизация</h1>

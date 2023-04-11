@@ -19,6 +19,7 @@ import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 import {useAppDispatch} from "./hooks/useAppDispatch";
 import {getMe} from "./redux/features/auth/authSlice";
+import {fetchBookTrips} from "./redux/features/bookingTrips/bookingTripsSlice";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -49,7 +50,10 @@ const App: React.FC = () => {
 
   useEffect(() => {
     dispatch(getMe())
+    dispatch(fetchBookTrips())
   }, [dispatch])
+
+
 
 
   const [collapsed, setCollapsed] = useState(false);

@@ -28,16 +28,16 @@ const dispatch = useAppDispatch()
 
     return (
         <div className={style.content}>
-            {(isTripsGet &&
-                (trips.items).map((item) => (
-            <Trip item={item}></Trip>
-            )))}
             <img src={bg} className={style.backgroundImg}/>
             <div className={style.inputButton}>
                 <Input value={from} setValue={setFrom} placeholder={'Откуда'}/>
                 <Input value={to} setValue={setTo} placeholder={'Куда'}/>
                 <Button text={'Найти'} onClick={getTrips}/>
             </div>
+            {(isTripsGet &&
+                (trips.items).map((item) => (
+                    <Trip item={item} isBook></Trip>
+                )))}
         </div>
     );
 };

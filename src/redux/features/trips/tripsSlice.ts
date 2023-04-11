@@ -20,12 +20,17 @@ export interface Items {
     to: string,
     from: string,
     cost: number,
-    user: string
+    user: UserType,
+    _id: string
 }
 
 type TripType = {
     from: string,
     to: string
+}
+
+type UserType = {
+    username: string
 }
 
 export const fetchTrips = createAsyncThunk(

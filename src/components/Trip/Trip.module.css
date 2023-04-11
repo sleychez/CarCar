@@ -1,0 +1,26 @@
+.content {
+    margin-top: 20px;
+    display: flex;
+    border: solid #1d6f74;
+    border-radius: 20px;
+    padding: 15px;
+    gap: 8px
+
+}
+
+.category {
+    color: #005f64;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: black;
+    font-weight: bold;
+    margin-left: 10px;
+}
