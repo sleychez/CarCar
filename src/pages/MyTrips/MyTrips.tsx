@@ -1,12 +1,21 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import Trip from "../../components/Trip/Trip";
 import {useSelector} from "react-redux";
 import {StateType} from "../../redux/store";
 import style from './MyTrips.module.css'
+import {getMe} from "../../redux/features/auth/authSlice";
+import {fetchBookTrips} from "../../redux/features/bookingTrips/bookingTripsSlice";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
 
 const MyTrips: FC = () => {
 
     const {bookingTrips} = useSelector((state: StateType) => state.bookingTrips)
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(fetchBookTrips())
+    }, [dispatch])
 
     const isTripsGet = bookingTrips.status === 'loaded'
 

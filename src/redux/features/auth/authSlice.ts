@@ -3,17 +3,24 @@ import axios from "../../../utils/axios";
 import {StateType} from "../../store";
 
 
+type InitialStateType = {
+    user: null | string,
+    token: null | string,
+    isLoading: boolean,
+    status: null | string
+}
 
-const initialState = {
+
+const initialState: InitialStateType = {
     user: null,
     token: null,
     isLoading: false,
     status: null
 }
 
-type UserType = {
-    username: string,
-    password: string
+export type UserType = {
+    username: string | null,
+    password: string | null
 }
 
 
@@ -134,6 +141,7 @@ const authSlice = createSlice({
 
 
 export const checkIsAuth = (state: StateType) => Boolean(state.auth.token)
+
 export const { logout } = authSlice.actions
 
 export const authReducer = authSlice.reducer

@@ -1,19 +1,35 @@
 import React, {FC} from 'react';
 
 import style from './Profile.module.css'
+import Button from "../../components/Button/Button";
 
 
 
-const Profile:FC = () => {
+
+
+
+const Profile:FC = ({}) => {
+
 
     return (
         <div>
 <div className={style.profileInfo}>
     <div className={style.photo}></div>
-    <h2>Имя</h2>
-    <h2>Фамилия</h2>
+    {}
+    <div className={style.name}>
+   <span>Имя</span>
+    <span>Света</span>
+    </div>
+    <div>
+        <span>Фамилия:</span>
+    <span>Света</span>
+    </div>
+    <div>
     <h2>Телефон</h2>
-    <h2 style={{cursor: "pointer"}}>Стать водителем</h2>
+        <span>89778258187</span>
+    </div>
+    <br/>
+    <Button text={'Стать водителем'}/>
 </div>
         </div>
     );
