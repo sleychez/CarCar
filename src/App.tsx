@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import {  Layout, Menu, theme } from 'antd';
-import {BrowserRouter, Link, Navigate, Route, Routes, useNavigate} from "react-router-dom";
+import {BrowserRouter, Link, Navigate, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import SearchTrip from "./pages/SearchTrip/SearchTrip";
 import Profile from "./pages/Profile/Profile";
 import MyTrips from "./pages/MyTrips/MyTrips";
@@ -22,6 +22,8 @@ import {checkIsAuth, getMe, UserType} from "./redux/features/auth/authSlice";
 import {fetchBookTrips} from "./redux/features/bookingTrips/bookingTripsSlice";
 import {useSelector} from "react-redux";
 import searchTrip from "./pages/SearchTrip/SearchTrip";
+import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -49,6 +51,7 @@ const App: React.FC = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const isAuth = useSelector(checkIsAuth)
+  const location = useLocation()
 
   useEffect(() => {
     dispatch(getMe())
@@ -58,7 +61,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (isAuth) {
       navigate('/searchTrip')
-    } else {
+    } else if (!location.pathname.includes('reset-password')){
       navigate('/login')
     }
   }, [isAuth])
@@ -99,10 +102,16 @@ const App: React.FC = () => {
                            element={<Register/>}/>
                     <Route path='/login/*'
                            element={<Login/>}/>
-
+                    <Route
+                        path="/forget-password"
+                        element={<ForgetPassword />}
+                    />
+                    <Route
+                        path="/reset-password/:token"
+                        element={<ResetPassword />}
+                    />
                   </>
               )}
-
             </Routes>
             <ToastContainer position='bottom-right'/>
           </Content>

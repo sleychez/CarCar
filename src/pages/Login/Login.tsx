@@ -3,7 +3,7 @@ import React, {FC, useEffect, useState} from 'react';
 import style from './Login.module.css'
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {StateType} from "../../redux/store";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
@@ -60,6 +60,9 @@ const Login: FC = () => {
         <div className={style.buttons}>
             <Button text={'Войти'} onClick={handleSubmit}/>
             <Button text={'Регистрация'} onClick={registerCallback}/>
+            <div className={style.forget}>
+                Forget Password? <Link to={`/forget-password`}>Reset Password</Link>
+            </div>
         </div>
     </form>
 };

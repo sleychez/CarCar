@@ -21,6 +21,7 @@ const Register: FC = () => {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
     const {status} = useSelector((state: StateType) => state.auth)
     const isAuth = useSelector(checkIsAuth)
 
@@ -38,9 +39,10 @@ const Register: FC = () => {
     const handleSubmit = () => {
         navigate('/login')
         try {
-            dispatch(registerUser({username, password} ))
+            dispatch(registerUser({username, password, email} ))
             setPassword('')
             setUsername('')
+            setEmail('')
         } catch (error) {
             console.log(error)
 
@@ -55,7 +57,10 @@ const Register: FC = () => {
             Username:
             <Input value={username} placeholder={'Username'} setValue={setUsername}/>
         </label>
-
+        <label className={style.label}>
+            Email:
+            <Input value={email} placeholder={'Email'} setValue={setEmail}/>
+        </label>
         <label className={style.label}>
             Password:
             <Input placeholder={'Password'} type='password' value={password} setValue={setPassword}/>

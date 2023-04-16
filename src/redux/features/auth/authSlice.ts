@@ -1,6 +1,14 @@
 import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "../../../utils/axios";
 import {StateType} from "../../store";
+import {toast} from "react-toastify";
+import {getError} from "../../../utils/getError";
+
+type ResetPasswordType = {
+    password: string,
+    token: string,
+    confirmPassword: string
+}
 
 
 type InitialStateType = {
@@ -20,18 +28,20 @@ const initialState: InitialStateType = {
 
 export type UserType = {
     username: string | null,
-    password: string | null
+    password: string | null,
+    email?: string | null
 }
 
 
 
 export const registerUser = createAsyncThunk(
     'auth/registerUser',
-    async ({username, password}: UserType) => {
+    async ({username, password, email}: UserType) => {
         try {
             const {data} = await axios.post('/auth/register', {
                 username,
                 password,
+                email
             })
             if (data.token) {
                 window.localStorage.setItem('token', data.token)
@@ -69,6 +79,40 @@ export const getMe = createAsyncThunk('auth/meUser', async () => {
         console.log(error)
     }
 })
+
+
+export const forgetPassword = createAsyncThunk(
+    'auth/forgetPassword',
+    async (username: string) => {
+    try {
+        const { data } = await axios.post('/auth/forget-password', {
+            username,
+        });
+        toast.success(data.message);
+    } catch (err) {
+        // @ts-ignore
+        toast.error(getError(err));
+    }
+});
+
+export const resetPassword = createAsyncThunk(
+    'auth/forgetPassword',
+    async ({password, token, confirmPassword}: ResetPasswordType) => {
+ if (password !== confirmPassword) {
+        toast.error('Пароли не совпадают');
+        return;
+    }
+    try {
+        await axios.post('/auth/reset-password', {
+            password,
+            token,
+        });
+        toast.success('Password updated successfully');
+    } catch (err: any) {
+
+        toast.error(getError(err));
+    }
+});
 
 
 

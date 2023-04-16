@@ -1,7 +1,12 @@
-import React, {FC} from 'react';
+import React, {FC,  useState} from 'react';
 
-import style from './Profile.module.css'
 import Button from "../../components/Button/Button";
+import Form from 'react-bootstrap/Form';
+import {getUserData} from "../../redux/features/profile/profileSlice";
+import {useSelector} from "react-redux";
+import {StateType} from "../../redux/store";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
+
 
 
 
@@ -11,28 +16,42 @@ import Button from "../../components/Button/Button";
 const Profile:FC = ({}) => {
 
 
+    const dispatch = useAppDispatch()
+
+    const getUserInfo = () => {
+        dispatch(getUserData(user))
+    }
+
+    const {user}: any | null = useSelector((state: StateType) => state.profile)
+
+        const [name, setName] = useState(user.username);
+
+
+
     return (
-        <div>
-<div className={style.profileInfo}>
-    <div className={style.photo}></div>
-    {}
-    <div className={style.name}>
-   <span>Имя</span>
-    <span>Света</span>
-    </div>
-    <div>
-        <span>Фамилия:</span>
-    <span>Света</span>
-    </div>
-    <div>
-    <h2>Телефон</h2>
-        <span>89778258187</span>
-    </div>
-    <br/>
-    <Button text={'Стать водителем'}/>
-</div>
-        </div>
-    );
-};
+            <div className="container small-container">
+                <div>
+                    <title>User Profile</title>
+                </div>
+                <h1 className="my-3">User Profile</h1>
+                <form onSubmit={getUserInfo}>
+                    <Form.Group className="mb-3" controlId="name">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
+
+
+                    <div className="mb-3">
+                        <Button text={'Update'}/>
+                    </div>
+                </form>
+            </div>
+        );
+    }
+
 
 export default Profile;
