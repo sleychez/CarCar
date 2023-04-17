@@ -2,9 +2,9 @@ import {FC, useState} from "react";
 import {Form} from "react-bootstrap";
 import Button from "../../components/Button/Button";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {forgetPassword, resetPassword} from "../../redux/features/auth/authSlice";
+import {resetPassword} from "../../redux/features/auth/authSlice";
 import {useNavigate, useParams} from "react-router-dom";
-
+import style from './ResetPassword.module.css'
 
 const ResetPassword:FC = () => {
     const {token} = useParams()
@@ -24,14 +24,12 @@ const ResetPassword:FC = () => {
     }
 
     return (
-        <div className="small-container">
-            <div>
-                <title>Reset Password</title>
-            </div>
-            <h1 className="my-3">Reset Password</h1>
-            <Form onSubmit={resetUserPassword}>
-                <Form.Group className="mb-3" controlId="password">
-                    <Form.Label>New Password</Form.Label>
+        <div className={style.container}>
+            <div className={style.smallContainer}>
+            <div className={style.resetText}>Обновление пароля</div>
+            <Form className={style.form} onSubmit={resetUserPassword}>
+                <Form.Group className={style.formGroup} controlId="password">
+                    <Form.Label>Новый пароль</Form.Label>
                     <Form.Control
                         value={password}
                         type="password"
@@ -39,8 +37,8 @@ const ResetPassword:FC = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="confirmPassword">
-                    <Form.Label>Confirm New Password</Form.Label>
+                <Form.Group className={style.formGroup} controlId="confirmPassword">
+                    <Form.Label>Подтвердите пароль</Form.Label>
                     <Form.Control
                         value={confirmPassword}
                         type="password"
@@ -48,11 +46,11 @@ const ResetPassword:FC = () => {
                         required
                     />
                 </Form.Group>
-
-                <div className="mb-3">
-                    <Button text={'Обновить пароль'}/>
-                </div>
             </Form>
+            <div>
+                <Button text={'Подтвердить'}/>
+            </div>
+            </div>
         </div>
     );
 }

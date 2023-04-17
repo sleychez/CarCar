@@ -2,10 +2,9 @@
 import {FC, useState} from "react";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {forgetPassword} from "../../redux/features/auth/authSlice";
-import {useSelector} from "react-redux";
-import {StateType} from "../../redux/store";
 import {Form} from "react-bootstrap";
 import Button from "../../components/Button/Button";
+import style from './Forget.module.css'
 
 
 const ForgetPassword: FC = () => {
@@ -20,14 +19,11 @@ const ForgetPassword: FC = () => {
 
 
     return (
-        <div className="small-container">
-            <div>
-                <title>Forget Password</title>
-            </div>
-            <h1 className="my-3">Forget Password</h1>
+        <div className={style.container}>
+            <div className={style.smallContainer}>
+            <div className={style.forgetText}>Введите логин</div>
             <Form onSubmit={forgetUserPassword}>
-                <Form.Group className="mb-3" controlId="login">
-                    <Form.Label>Login</Form.Label>
+                <Form.Group className={style.from} controlId="login">
                     <Form.Control
                         value={login}
                         type="login"
@@ -35,11 +31,11 @@ const ForgetPassword: FC = () => {
                         onChange={(e) => setLogin(e.target.value)}
                     />
                 </Form.Group>
-
-                <div className="mb-3">
-                    <Button text={'submit'}/>
-                </div>
             </Form>
+            <div>
+                <Button text={'Подтвердить'}/>
+            </div>
+            </div>
         </div>
     );
 }

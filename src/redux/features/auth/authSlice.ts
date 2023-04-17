@@ -12,7 +12,7 @@ type ResetPasswordType = {
 
 
 type InitialStateType = {
-    user: null | string,
+    user: UserType | null,
     token: null | string,
     isLoading: boolean,
     status: null | string
@@ -27,9 +27,10 @@ const initialState: InitialStateType = {
 }
 
 export type UserType = {
-    username: string | null,
-    password: string | null,
-    email?: string | null
+    username?: string | null,
+    password?: string | null,
+    email?: string | null,
+    car?: string | null
 }
 
 
@@ -79,6 +80,19 @@ export const getMe = createAsyncThunk('auth/meUser', async () => {
         console.log(error)
     }
 })
+
+
+export const postCar = createAsyncThunk('auth/myCar', async ({car} : UserType) => {
+    try {
+        const {data} = await axios.post('/auth/login', {
+            car
+        })
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+        },
+)
 
 
 export const forgetPassword = createAsyncThunk(

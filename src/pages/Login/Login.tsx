@@ -29,13 +29,12 @@ const Login: FC = () => {
     }, [status, isAuth, navigate])
 
 
-
     const dispatch = useAppDispatch()
 
     const handleSubmit = () => {
         navigate('/profile')
         try {
-            dispatch(loginUser({username, password} ))
+            dispatch(loginUser({username, password}))
         } catch (error) {
             console.log(error)
 
@@ -44,16 +43,16 @@ const Login: FC = () => {
 
 
     return <form style={{margin: '150px auto',}}
-        onSubmit={(e) => e.preventDefault()}
-        className={style.form}>
-<h1 className={style.h1}>Авторизация</h1>
-<label className={style.label}>
-    Username:
-    <Input value={username} placeholder={'Username'} setValue={setUsername}/>
-</label>
+                 onSubmit={(e) => e.preventDefault()}
+                 className={style.form}>
+        <div className={style.authorizationText}>Авторизация</div>
+        <label className={style.label}>
+            Логин:
+            <Input value={username} placeholder={'Username'} setValue={setUsername}/>
+        </label>
 
         <label className={style.label}>
-            Password:
+            Пароль:
             <Input placeholder={'Password'} type='password' value={password} setValue={setPassword}/>
         </label>
 
@@ -61,7 +60,7 @@ const Login: FC = () => {
             <Button text={'Войти'} onClick={handleSubmit}/>
             <Button text={'Регистрация'} onClick={registerCallback}/>
             <div className={style.forget}>
-                Forget Password? <Link to={`/forget-password`}>Reset Password</Link>
+                Забыли пароль? <Link className={style.link} to={`/forget-password`}>Сбросить пароль</Link>
             </div>
         </div>
     </form>

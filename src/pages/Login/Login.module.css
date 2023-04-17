@@ -2,18 +2,20 @@
     width: 500px;
     height: 350px;
     background-color: #1D7074;
-    margin: 100px 0 0 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 20px;
-
+    border-radius: 30px;
+    margin: 150px auto;
+    border: solid black;
 }
 
-.h1 {
+.authorizationText  {
     color: white;
-   font-size: 30px;
+    font-size: 30px;
+    font-weight: 500;
 
 }
 
@@ -23,13 +25,25 @@
     gap: 5px;
     font-size: 20px;
     flex-direction: column;
+
 }
 
 .buttons {
     display: flex;
-    gap: 30px
+    gap: 30px;
+    margin-left: 40px;
+    font-weight: 500;
+    margin-top: 10px;
 }
 
 .forget {
+    font-size: 15px;
+    width: 150px;
 
+
+
+}
+
+.link {
+    color: white;
 }

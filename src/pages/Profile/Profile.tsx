@@ -1,57 +1,40 @@
-import React, {FC,  useState} from 'react';
+import React, {FC, useState} from 'react';
 
-import Button from "../../components/Button/Button";
-import Form from 'react-bootstrap/Form';
-import {getUserData} from "../../redux/features/profile/profileSlice";
 import {useSelector} from "react-redux";
 import {StateType} from "../../redux/store";
+import Button from "../../components/Button/Button";
+import Input from "../../components/Input/Input";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {postCar} from "../../redux/features/auth/authSlice";
 
 
-
-
-
-
-
-const Profile:FC = ({}) => {
-
+const Profile: FC = ({}) => {
+    const [car, setCarName] = useState('')
+    const {user} = useSelector((state: StateType) => state.auth)
 
     const dispatch = useAppDispatch()
 
-    const getUserInfo = () => {
-        dispatch(getUserData(user))
+    const setCar = () => {
+        try {
+            dispatch(postCar({car}))
+        } catch (error) {
+            console.log(error)
+        }
     }
-
-    const {user}: any | null = useSelector((state: StateType) => state.profile)
-
-        const [name, setName] = useState(user.username);
-
-
 
     return (
-            <div className="container small-container">
-                <div>
-                    <title>User Profile</title>
-                </div>
-                <h1 className="my-3">User Profile</h1>
-                <form onSubmit={getUserInfo}>
-                    <Form.Group className="mb-3" controlId="name">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                        />
-                    </Form.Group>
-
-
-                    <div className="mb-3">
-                        <Button text={'Update'}/>
-                    </div>
-                </form>
+        <div>
+            <div>
+                {user?.username}
             </div>
-        );
-    }
+            <div>
+                {user?.email}
+            </div>
+            <Button onClick={setCar} text={'Стать водителем'}/>
+            <Input setValue={setCarName} value={car}/>
+        </div>
+    );
+}
 
 
 export default Profile;
