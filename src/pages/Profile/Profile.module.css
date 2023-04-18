@@ -13,3 +13,29 @@
 .name {
     display: flex;
 }
+
+.container {
+    margin: 20px 0 0 20px;
+
+}
+
+.span {
+    color: #1d6f74;
+    font-size: 20px;
+}
+
+.info {
+    font-size: 25px;
+}
+
+.button {
+    margin-top: 20px;
+}
+
+.setCar {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    font-size: 15px;
+   font-weight: 500;
+}

@@ -21,7 +21,7 @@ type InitialStateType = {
 
 const initialState: InitialStateType = {
     user: null,
-    token: null,
+    token: localStorage.getItem('token'),
     isLoading: false,
     status: null
 }
@@ -81,18 +81,6 @@ export const getMe = createAsyncThunk('auth/meUser', async () => {
     }
 })
 
-
-export const postCar = createAsyncThunk('auth/myCar', async ({car} : UserType) => {
-    try {
-        const {data} = await axios.post('/auth/login', {
-            car
-        })
-        return data
-    } catch (error) {
-        console.log(error)
-    }
-        },
-)
 
 
 export const forgetPassword = createAsyncThunk(
@@ -199,7 +187,7 @@ const authSlice = createSlice({
 
 
 export const checkIsAuth = (state: StateType) => Boolean(state.auth.token)
-
+export const checkIsDriver = (state: StateType) => Boolean(state.auth.user?.car)
 export const { logout } = authSlice.actions
 
 export const authReducer = authSlice.reducer

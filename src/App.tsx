@@ -18,12 +18,11 @@ import {Header} from "./components/Header/Header";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 import {useAppDispatch} from "./hooks/useAppDispatch";
-import {checkIsAuth, getMe, UserType} from "./redux/features/auth/authSlice";
-import {fetchBookTrips} from "./redux/features/bookingTrips/bookingTripsSlice";
+import {checkIsAuth, checkIsDriver, getMe} from "./redux/features/auth/authSlice";
 import {useSelector} from "react-redux";
-import searchTrip from "./pages/SearchTrip/SearchTrip";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+
 
 const { Content, Footer, Sider } = Layout;
 
@@ -43,37 +42,75 @@ function getItem(
   } as MenuItem;
 }
 
+const privateRoutes = [
+  {
+    path: '/searchTrip/*',
+    element: <SearchTrip/>
+  },
+  {
+    path: '/profile/*' ,
+    element: <Profile/>
+  },
+  {
+    path: '/myTrips/*' ,
+    element: <MyTrips/>
+  }
+]
 
+const publicRoutes = [
+  {
+    path: '/register/*',
+    element: <Register/>
+  },
+  {
+    path: '/login/*' ,
+    element: <Login/>
+  },
+  {
+    path: '/forget-password',
+    element: <ForgetPassword/>
+  },
+  {
+    path: '/reset-password',
+    element: <ResetPassword/>
+  }
 
-
+]
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const isAuth = useSelector(checkIsAuth)
   const location = useLocation()
+  const isDriver = useSelector(checkIsDriver)
 
   useEffect(() => {
     dispatch(getMe())
   }, [dispatch])
 
-
   useEffect(() => {
-    if (isAuth) {
+    if (isAuth && publicRoutes.find((item) =>
+    item.path.includes(location.pathname))) {
       navigate('/searchTrip')
-    } else if (!location.pathname.includes('reset-password')){
+    } else if (!isAuth && privateRoutes.find((item) =>
+    item.path.includes(location.pathname))){
       navigate('/login')
     }
   }, [isAuth])
 
 
-  const items: MenuItem[] = isAuth ? [
-    getItem('Search trip', '1', <Link to='/searchTrip'><SearchOutlined /></Link>),
-    getItem('Profile', '2', <Link to='/profile'><UserOutlined /></Link>),
-    getItem('My trips', '3', <Link to='/myTrips'><CarOutlined /></Link>)
-  ] : [];
 
-  const [collapsed, setCollapsed] = useState(false);
+  const items: MenuItem[] = isAuth && isDriver ? [
+    getItem('Создать поездку', '1', <Link to='/searchTrip'><SearchOutlined /></Link>),
+    getItem('Профиль', '2', <Link to='/profile'><UserOutlined /></Link>),
+    getItem('Мои поездки', '3', <Link to='/myTrips'><CarOutlined /></Link>)
+  ] : [
+    getItem('Поиск поездки', '1', <Link to='/searchTrip'><SearchOutlined /></Link>),
+    getItem('Профиль', '2', <Link to='/profile'><UserOutlined /></Link>),
+    getItem('Мои поездки', '3', <Link to='/myTrips'><CarOutlined /></Link>)
+  ];
+
+  const [collapsed, setCollapsed] = useState(true);
   const {
   } = theme.useToken();
 
@@ -84,32 +121,22 @@ const App: React.FC = () => {
           <Menu className={style.menu} theme="light"  mode='inline' items={items} />
         </Sider>
         <Layout className="site-layout">
-         <Header/>
+          <Header/>
           <Content className={style.content}>
             <Routes>
               {isAuth ? (
                   <>
-                    <Route path='/searchTrip/*'
-                           element={<SearchTrip/>}/>
-                    <Route path='/profile/*'
-                           element={<Profile/>}/>
-                    <Route path='/myTrips/*'
-                           element={<MyTrips/>}/>
+                    {privateRoutes.map((item) =>
+                        <Route path={item.path} element={item.element}/>
+                    )
+                    }
                   </>
               ) : (
                   <>
-                    <Route path='/register/*'
-                           element={<Register/>}/>
-                    <Route path='/login/*'
-                           element={<Login/>}/>
-                    <Route
-                        path="/forget-password"
-                        element={<ForgetPassword />}
-                    />
-                    <Route
-                        path="/reset-password/:token"
-                        element={<ResetPassword />}
-                    />
+                    {publicRoutes.map((item) =>
+                        <Route path={item.path} element={item.element}/>
+                    )
+                    }
                   </>
               )}
             </Routes>

@@ -4,6 +4,7 @@ import {userInfo} from "os";
 import {toast} from "react-toastify";
 import {UserType} from "../auth/authSlice";
 import {getError} from "../../../utils/getError";
+import {StateType} from "../../store";
 
 
 type InitialStateType = {
@@ -43,6 +44,19 @@ export const getUserData = createAsyncThunk(
 }
 )
 
+export const postCar = createAsyncThunk('auth/myCar',
+    async ({car} : UserType) => {
+        try {
+            const {data} = await axios.post('/auth/car', {
+                car
+            })
+            return data
+        } catch (error) {
+            console.log(error)
+        }
+    },
+)
+
 
 
 const profileSlice = createSlice({
@@ -65,5 +79,7 @@ const profileSlice = createSlice({
             })
     }
 })
+
+
 
 export const profileReducer = profileSlice.reducer

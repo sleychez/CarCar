@@ -25,14 +25,12 @@ const Login: FC = () => {
 
     useEffect(() => {
         if (status) toast(status)
-        if (isAuth) navigate('/profile')
     }, [status, isAuth, navigate])
 
 
     const dispatch = useAppDispatch()
 
     const handleSubmit = () => {
-        navigate('/profile')
         try {
             dispatch(loginUser({username, password}))
         } catch (error) {
