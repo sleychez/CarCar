@@ -1,6 +1,6 @@
 import {FC, useState} from "react";
 import {Form} from "react-bootstrap";
-import Button from "../../components/Button/Button";
+import Button from 'react-bootstrap/Button';
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {resetPassword} from "../../redux/features/auth/authSlice";
 import {useNavigate, useParams} from "react-router-dom";
@@ -48,7 +48,7 @@ const ResetPassword:FC = () => {
                 </Form.Group>
             </Form>
             <div>
-                <Button text={'Подтвердить'}/>
+                <Button className={style.button} type='submit'>Подтвердить</Button>
             </div>
             </div>
         </div>

@@ -3,7 +3,7 @@ import {FC, useState} from "react";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {forgetPassword} from "../../redux/features/auth/authSlice";
 import {Form} from "react-bootstrap";
-import Button from "../../components/Button/Button";
+import Button from 'react-bootstrap/Button';
 import style from './Forget.module.css'
 
 
@@ -33,7 +33,7 @@ const ForgetPassword: FC = () => {
                 </Form.Group>
             </Form>
             <div>
-                <Button text={'Подтвердить'}/>
+                <Button className={style.button} type='submit'>Подтвердить</Button>
             </div>
             </div>
         </div>

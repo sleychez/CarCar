@@ -18,3 +18,11 @@ width: fit-content;
     gap: 10px;
     align-items: center;
 }
+
+.button {
+    cursor: pointer;
+    background-color: #013c68;
+    color: white;
+    border-radius: 5px;
+    height: 30px;
+}

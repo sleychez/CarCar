@@ -2,9 +2,12 @@ import React, {FC} from 'react';
 
 import style from './Button.module.css'
 
+type TButtonType = 'button' | 'reset' | 'submit'
+
 type ButtonProps = {
     onClick?: () => void;
     text?: string | number;
+    type?: TButtonType
 
 };
 
