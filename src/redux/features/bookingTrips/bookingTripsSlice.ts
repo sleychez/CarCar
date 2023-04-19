@@ -30,14 +30,16 @@ export const bookTrips = createAsyncThunk('booking/book', async (tripId: string)
 })
 
 
-export const fetchBookTrips = createAsyncThunk('booking/getbookings', async () => {
+export const fetchBookTrips = createAsyncThunk('booking/getBookings', async () => {
     try {
-        const {data} = await axios.get('/booking/getbookings')
+        const {data} = await axios.get('/booking/getBookings')
         return data
     } catch (error) {
         console.log(error)
     }
 })
+
+
 
 
 

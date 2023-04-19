@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {fetchTrips, Items} from "../../redux/features/trips/tripsSlice";
+import { Items} from "../../redux/features/trips/tripsSlice";
 import style from './Trip.module.css'
 import Button from "../Button/Button";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
@@ -18,7 +18,9 @@ const Trip: FC<TripProps> = ({item, isBook}) => {
 
 
     const book = () => {
+        if (item._id != null) {
             dispatch(bookTrips(item._id))
+        }
         }
 
 
@@ -35,7 +37,7 @@ const Trip: FC<TripProps> = ({item, isBook}) => {
                 <span>{item.from}</span>
                 <span>{item.to}</span>
                 <span>{item.cost}</span>
-                <span>{item.user.username}</span>
+                <span>{item.user!.username}</span>
             </div>
             {(isBook &&
                 <Button text={'Забронировать'} onClick={book}/>

@@ -66,7 +66,8 @@ export const loginUser = createAsyncThunk(
                 window.localStorage.setItem('token', data.token)
             }
             return data
-        } catch (error) {
+        } catch (error: any) {
+            toast.error(getError(error))
             console.log(error)
         }
     },
@@ -109,7 +110,7 @@ export const resetPassword = createAsyncThunk(
             password,
             token,
         });
-        toast.success('Password updated successfully');
+        toast.success('Пароль успешно обновлен');
     } catch (err: any) {
 
         toast.error(getError(err));

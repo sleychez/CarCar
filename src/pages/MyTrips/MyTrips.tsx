@@ -3,7 +3,6 @@ import Trip from "../../components/Trip/Trip";
 import {useSelector} from "react-redux";
 import {StateType} from "../../redux/store";
 import style from './MyTrips.module.css'
-import {getMe} from "../../redux/features/auth/authSlice";
 import {fetchBookTrips} from "../../redux/features/bookingTrips/bookingTripsSlice";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 

@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import {  Layout, Menu, theme } from 'antd';
-import {BrowserRouter, Link, Navigate, Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import { Link, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import SearchTrip from "./pages/SearchTrip/SearchTrip";
 import Profile from "./pages/Profile/Profile";
 import MyTrips from "./pages/MyTrips/MyTrips";
@@ -22,6 +22,7 @@ import {checkIsAuth, checkIsDriver, getMe} from "./redux/features/auth/authSlice
 import {useSelector} from "react-redux";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import CreationTrip from "./pages/CreationTrip/CreationTrip";
 
 
 const { Content, Footer, Sider } = Layout;
@@ -54,6 +55,10 @@ const privateRoutes = [
   {
     path: '/myTrips/*' ,
     element: <MyTrips/>
+  },
+  {
+    path: '/creationTrip/*',
+    element: <CreationTrip/>
   }
 ]
 
@@ -101,7 +106,7 @@ const App: React.FC = () => {
 
 
   const items: MenuItem[] = isAuth && isDriver ? [
-    getItem('Создать поездку', '1', <Link to='/searchTrip'><SearchOutlined /></Link>),
+    getItem('Создать поездку', '1', <Link to='/creationTrip'><SearchOutlined /></Link>),
     getItem('Профиль', '2', <Link to='/profile'><UserOutlined /></Link>),
     getItem('Мои поездки', '3', <Link to='/myTrips'><CarOutlined /></Link>)
   ] : [

@@ -19,9 +19,9 @@ const initialState: InitialStateType = {
 export interface Items {
     to: string,
     from: string,
-    cost: number,
-    user: UserType,
-    _id: string
+    cost: number | string,
+    user?: UserType,
+    _id?: string
 }
 
 type TripType = {
@@ -44,6 +44,21 @@ export const fetchTrips = createAsyncThunk(
     })
     return data
 })
+
+export const postTrip = createAsyncThunk('trip/myTrip',
+    async ({from, to, cost} : Items) => {
+        try {
+            const {data} = await axios.post('/trip/createTrip', {
+                from,
+                to,
+                cost
+            })
+            return data
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
 
 
 

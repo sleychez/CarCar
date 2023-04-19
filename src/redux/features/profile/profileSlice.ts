@@ -5,6 +5,7 @@ import {toast} from "react-toastify";
 import {UserType} from "../auth/authSlice";
 import {getError} from "../../../utils/getError";
 import {StateType} from "../../store";
+import {Items} from "../trips/tripsSlice";
 
 
 type InitialStateType = {
