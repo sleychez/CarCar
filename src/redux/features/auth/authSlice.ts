@@ -31,6 +31,7 @@ export type UserType = {
     password?: string | null,
     email?: string | null,
     car?: string | null
+    roles?: Array<string>
 }
 
 
@@ -48,7 +49,8 @@ export const registerUser = createAsyncThunk(
                 window.localStorage.setItem('token', data.token)
             }
             return data
-        } catch (error) {
+        } catch (error: any) {
+            toast.error(getError(error))
             console.log(error)
         }
     },
@@ -62,11 +64,13 @@ export const loginUser = createAsyncThunk(
                 username,
                 password,
             })
+            toast.success(data.message)
             if (data.token) {
                 window.localStorage.setItem('token', data.token)
             }
             return data
-        } catch (error: any) {
+
+        } catch (error:any) {
             toast.error(getError(error))
             console.log(error)
         }
@@ -92,8 +96,7 @@ export const forgetPassword = createAsyncThunk(
             username,
         });
         toast.success(data.message);
-    } catch (err) {
-        // @ts-ignore
+    } catch (err:any) {
         toast.error(getError(err));
     }
 });
@@ -116,6 +119,7 @@ export const resetPassword = createAsyncThunk(
         toast.error(getError(err));
     }
 });
+
 
 
 

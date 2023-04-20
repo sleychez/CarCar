@@ -1,10 +1,10 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Input from "../../components/Input/Input";
 import bg from '../../assets/images/photo_2023-03-19_18-09-11.png';
 import style from './SearchTrip.module.css'
 import Button from "../../components/Button/Button";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {fetchTrips} from "../../redux/features/trips/tripsSlice";
+import {dropState, fetchTrips} from "../../redux/features/trips/tripsSlice";
 import {useSelector} from "react-redux";
 import {StateType} from "../../redux/store";
 import Trip from "../../components/Trip/Trip";
@@ -16,15 +16,22 @@ import icon3 from '../../assets/images/icon3.svg'
 
 
 
+
 const SearchTrip:FC = () => {
     const [from, setFrom] = useState("");
     const [to, setTo] = useState("");
+    const dispatch = useAppDispatch()
 
-const dispatch = useAppDispatch()
     const {trips} = useSelector((state: StateType) => state.trips)
 
     const isTripsGet = trips.status === 'loaded'
 
+
+    useEffect(() => {
+        return () =>  {
+            dispatch(dropState())
+        }
+    }, [])
 
     const getTrips = () => {
         dispatch(fetchTrips({from, to}))

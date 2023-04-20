@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import { useSelector} from "react-redux";
-import style from "../Login/Login.module.css";
+import style from './Register.module.css'
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import {checkIsAuth, registerUser} from "../../redux/features/auth/authSlice";
@@ -52,7 +52,7 @@ const Register: FC = () => {
     return <form
         onSubmit={(e) => e.preventDefault()}
         className={style.form}>
-        <h1 className={style.h1}>Регистрация</h1>
+        <h1 className={style.registerText}>Регистрация</h1>
         <label className={style.label}>
             Username:
             <Input value={username} placeholder={'Username'} setValue={setUsername}/>

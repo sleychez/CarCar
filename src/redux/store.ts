@@ -3,6 +3,7 @@ import {authReducer} from "./features/auth/authSlice";
 import {tripsReducer} from "./features/trips/tripsSlice";
 import {bookingTripsReducer} from './features/bookingTrips/bookingTripsSlice'
 import {profileReducer} from "./features/profile/profileSlice";
+import {usersReducer} from "./features/users/usersSlice";
 
 
 export const store = configureStore({
@@ -10,7 +11,8 @@ export const store = configureStore({
         auth: authReducer,
         trips: tripsReducer,
         bookingTrips: bookingTripsReducer,
-        profile: profileReducer
+        profile: profileReducer,
+        users: usersReducer
     }
 })
 

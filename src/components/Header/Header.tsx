@@ -33,6 +33,7 @@ export const Header: React.FC = () => {
 
 
     return <Header className={style.header}>
+       <span className={style.carCar}>CarCar</span>
         {isAuth
             ? <>
                 <Button text={'Выйти'} onClick={logoutHandler}/>

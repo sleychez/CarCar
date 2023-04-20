@@ -1,0 +1,30 @@
+.containerTrip {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin: 20px 0 20px 0
+}
+
+.title {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+    gap:25px;
+    color: #1d6f74;
+    font-size: 15px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px
+}
+
+.container {
+    margin: 50px 0 0 50px
+}

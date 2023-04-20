@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "../../../utils/axios";
 import {Items} from "../trips/tripsSlice";
+import {toast} from "react-toastify";
 
 
 type InitialStateType = {
@@ -23,6 +24,7 @@ const initialState: InitialStateType = {
 export const bookTrips = createAsyncThunk('booking/book', async (tripId: string) => {
     try {
         const {data} = await axios.post('/booking/book', {tripId})
+        toast.success(data.message)
         return data
     } catch (error) {
         console.log(error)
@@ -39,7 +41,13 @@ export const fetchBookTrips = createAsyncThunk('booking/getBookings', async () =
     }
 })
 
-
+export const deleteBookTrip = createAsyncThunk(
+    'trip/deleteBookTrip',
+    async (tripId: string) => {
+        const {data} = await axios.delete(`/booking/deleteBookTrip/${tripId}`)
+        return data
+    }
+)
 
 
 

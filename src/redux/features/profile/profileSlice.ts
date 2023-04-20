@@ -4,8 +4,7 @@ import {userInfo} from "os";
 import {toast} from "react-toastify";
 import {UserType} from "../auth/authSlice";
 import {getError} from "../../../utils/getError";
-import {StateType} from "../../store";
-import {Items} from "../trips/tripsSlice";
+
 
 
 type InitialStateType = {
@@ -38,8 +37,7 @@ export const getUserData = createAsyncThunk(
         );
         localStorage.setItem('userInfo', JSON.stringify(data));
         toast.success('User updated successfully');
-    } catch (err) {
-        // @ts-ignore
+    } catch (err: any) {
         toast.error(getError(err));
     }
 }

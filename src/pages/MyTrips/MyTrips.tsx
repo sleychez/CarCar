@@ -22,7 +22,7 @@ const MyTrips: FC = () => {
         <div className={style.booking}>
             {(isTripsGet &&
                 (bookingTrips.items).map((item) => (
-                    <Trip item={item} isBook={false}></Trip>
+                    <Trip item={item} isBook={false} isCreated={false}></Trip>
                 )))}
         </div>
     );
