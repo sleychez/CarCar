@@ -4,7 +4,7 @@ import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {forgetPassword} from "../../redux/features/auth/authSlice";
 import {Form} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
-import style from './Forget.module.css'
+import style from './ForgetPassword.module.css'
 
 
 const ForgetPassword: FC = () => {
@@ -33,7 +33,7 @@ const ForgetPassword: FC = () => {
                 </Form.Group>
             </Form>
             <div>
-                <Button className={style.button} type='submit'>Подтвердить</Button>
+                <Button className={style.button } type='submit'>Подтвердить</Button>
             </div>
             </div>
         </div>

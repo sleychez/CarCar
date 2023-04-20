@@ -22,8 +22,8 @@ import {checkIsAuth, checkIsDriver, getMe} from "./redux/features/auth/authSlice
 import {useSelector} from "react-redux";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
-import CreationTrip from "./pages/CreationTrip/CreationTrip";
-import MyCreatedTrip from "./pages/MyCreatedTrip/MyCreatedTrip";
+import CreatedTrip from "./pages/CreationTrip/CreatedTrip";
+import MyCreatedTrips from "./pages/MyCreatedTrip/MyCreatedTrips";
 import {StateType} from "./redux/store";
 import ListOfUsers from "./pages/ListOfUsers/ListOfUsers";
 
@@ -60,12 +60,12 @@ const privateRoutes = [
         element: <MyTrips/>
     },
     {
-        path: '/creationTrip/*',
-        element: <CreationTrip/>
+        path: '/createdTrip/*',
+        element: <CreatedTrip/>
     },
     {
         path: '/myCreatedTrips/*',
-        element: <MyCreatedTrip/>
+        element: <MyCreatedTrips/>
     }
 
 ]
@@ -146,7 +146,7 @@ const App: React.FC = () => {
     if (isAuth && !user?.roles?.includes('ADMIN')) {
       if (isDriver) {
         return [
-          getItem('Создать поездку', '1', <Link to='/creationTrip'><PlusCircleOutlined/></Link>),
+          getItem('Создать поездку', '1', <Link to='/createdTrip'><PlusCircleOutlined/></Link>),
           getItem('Профиль', '2', <Link to='/profile'><UserOutlined/></Link>),
           getItem('Мои поездки', '3', <Link to='/myCreatedTrips'><CarOutlined/></Link>)
         ]
