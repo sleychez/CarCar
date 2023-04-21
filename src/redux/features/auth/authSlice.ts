@@ -30,8 +30,9 @@ export type UserType = {
     username?: string | null,
     password?: string | null,
     email?: string | null,
-    car?: string | null
-    roles?: Array<string>
+    car?: string | null,
+    roles?: Array<string>,
+    _id?: string
 }
 
 

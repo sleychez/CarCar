@@ -24,21 +24,11 @@ const initialState: InitialStateType = {
 
 export const getUsersData = createAsyncThunk(
     'auth/getUsersData',
-    async ({username, password, email, car , roles}: UserType) => {
+    async () => {
         try {
             const { data } = await axios.get(
-                '/auth/users',
-                {
-                    params: {
-                        username,
-                        password,
-                        email,
-                        car,
-                        roles
-                    }
-                },
-            );
-            localStorage.setItem('userInfo', JSON.stringify(data));
+                '/auth/users');
+            return data
         } catch (err: any) {
             toast.error(getError(err));
         }
@@ -46,20 +36,20 @@ export const getUsersData = createAsyncThunk(
 )
 
 const usersSlice = createSlice({
-    name: 'trips',
+    name: 'users',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchTrips.pending, (state) => {
+            .addCase(getUsersData.pending, (state) => {
                 state.users.userItems = []
                 state.users.status = 'loading'
             })
-            .addCase(fetchTrips.fulfilled, (state, action) => {
+            .addCase(getUsersData.fulfilled, (state, action) => {
                 state.users.userItems = action.payload
                 state.users.status = 'loaded'
             })
-            .addCase(fetchTrips.rejected, (state)  => {
+            .addCase(getUsersData.rejected, (state)  => {
                 state.users.userItems = []
                 state.users.status = 'error'
             })

@@ -1,0 +1,12 @@
+.users {
+    max-width: 350px;
+}
+
+.title {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.content {
+    margin: 10px 0 10px 10px;
+}

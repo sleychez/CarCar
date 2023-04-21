@@ -116,9 +116,9 @@ const App: React.FC = () => {
     }
 
     useEffect(() => {
-      if (isAuth) {
-        load()
-      }
+        if (isAuth) {
+            load()
+        }
     }, [isAuth])
 
     useEffect(() => {
@@ -187,7 +187,7 @@ const App: React.FC = () => {
 
     const [collapsed, setCollapsed] = useState(true);
     const {} = theme.useToken();
-    if (isLoading) {
+    if (isLoading && isAuth) {
       return (
           <div>Loading...</div>
       )
