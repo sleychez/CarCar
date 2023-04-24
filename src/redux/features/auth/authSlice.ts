@@ -103,23 +103,21 @@ export const forgetPassword = createAsyncThunk(
 });
 
 export const resetPassword = createAsyncThunk(
-    'auth/forgetPassword',
+    'auth/resetPassword',
     async ({password, token, confirmPassword}: ResetPasswordType) => {
- if (password !== confirmPassword) {
-        toast.error('Пароли не совпадают');
-        return;
-    }
-    try {
-        await axios.post('/auth/reset-password', {
-            password,
-            token,
-        });
-        toast.success('Пароль успешно обновлен');
-    } catch (err: any) {
-
-        toast.error(getError(err));
-    }
-});
+        if (password !== confirmPassword) {
+            return;
+        }
+        try {
+          const {data} = await axios.post('/auth/reset-password', {
+                password,
+                token,
+            });
+            toast.success(data.message);
+        } catch (err: any) {
+            toast.error(getError(err));
+        }
+    });
 
 
 

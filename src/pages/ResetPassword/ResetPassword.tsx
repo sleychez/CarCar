@@ -1,10 +1,10 @@
 import {FC, useState} from "react";
 import {Form} from "react-bootstrap";
-import Button from 'react-bootstrap/Button';
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {resetPassword} from "../../redux/features/auth/authSlice";
 import {useNavigate, useParams} from "react-router-dom";
 import style from './ResetPassword.module.css'
+import Button from "../../components/Button/Button";
 
 const ResetPassword:FC = () => {
     const {token} = useParams()
@@ -12,7 +12,9 @@ const ResetPassword:FC = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const dispatch = useAppDispatch()
-    const  resetUserPassword  = async () => {
+
+
+    const resetUserPassword  = async () => {
         try {
             if (token) {
                 await dispatch(resetPassword({password, confirmPassword, token}))
@@ -27,7 +29,7 @@ const ResetPassword:FC = () => {
         <div className={style.container}>
             <div className={style.smallContainer}>
             <div className={style.resetText}>Обновление пароля</div>
-            <Form className={style.form} onSubmit={resetUserPassword}>
+            <Form className={style.form}>
                 <Form.Group className={style.formGroup} controlId="password">
                     <Form.Label>Новый пароль</Form.Label>
                     <Form.Control
@@ -48,7 +50,7 @@ const ResetPassword:FC = () => {
                 </Form.Group>
             </Form>
             <div>
-                <Button className={style.button} type='submit'>Подтвердить</Button>
+                <Button onClick={resetUserPassword} text={'Подтвердить'} type='submit'/>
             </div>
             </div>
         </div>

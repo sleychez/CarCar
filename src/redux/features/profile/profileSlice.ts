@@ -36,7 +36,6 @@ export const getUserData = createAsyncThunk(
             },
         );
         localStorage.setItem('userInfo', JSON.stringify(data));
-        toast.success('User updated successfully');
     } catch (err: any) {
         toast.error(getError(err));
     }
