@@ -1,5 +1,4 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {fetchTrips} from "../trips/tripsSlice";
 import {UserType} from "../auth/authSlice";
 import axios from "../../../utils/axios";
 import {toast} from "react-toastify";

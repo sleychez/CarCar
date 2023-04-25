@@ -71,7 +71,7 @@ const profileSlice = createSlice({
                 state.user.username = action.payload
                 state.user.password = action.payload
             })
-            .addCase(getUserData.rejected, (state, action) => {
+            .addCase(getUserData.rejected, (state) => {
                 state.user.username = null
                 state.user.password = null
             })

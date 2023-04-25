@@ -4,11 +4,11 @@ import style from './Login.module.css'
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import {Link, useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {StateType} from "../../redux/store";
+
+
 import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {checkIsAuth, loginUser} from "../../redux/features/auth/authSlice";
-import {toast} from "react-toastify";
+import {loginUser} from "../../redux/features/auth/authSlice";
+
 
 const Login: FC = () => {
 
@@ -20,12 +20,7 @@ const Login: FC = () => {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const isAuth = useSelector(checkIsAuth)
-    const {status} = useSelector((state: StateType) => state.auth)
 
-    useEffect(() => {
-        if (status) toast(status)
-    }, [status, isAuth, navigate])
 
 
     const dispatch = useAppDispatch()

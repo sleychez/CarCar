@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "../../../utils/axios";
 import {StateType} from "../../store";
 import {toast} from "react-toastify";
@@ -9,6 +9,7 @@ type ResetPasswordType = {
     token: string,
     confirmPassword: string
 }
+
 
 
 type InitialStateType = {
@@ -36,7 +37,6 @@ export type UserType = {
 }
 
 
-
 export const registerUser = createAsyncThunk(
     'auth/registerUser',
     async ({username, password, email}: UserType) => {
@@ -54,6 +54,7 @@ export const registerUser = createAsyncThunk(
             toast.error(getError(error))
             console.log(error)
         }
+
     },
 )
 
@@ -71,7 +72,7 @@ export const loginUser = createAsyncThunk(
             }
             return data
 
-        } catch (error:any) {
+        } catch (error: any) {
             toast.error(getError(error))
             console.log(error)
         }
@@ -80,7 +81,7 @@ export const loginUser = createAsyncThunk(
 
 export const getMe = createAsyncThunk('auth/meUser', async () => {
     try {
-        const { data } = await axios.get('/auth/me')
+        const {data} = await axios.get('/auth/me')
         return data
     } catch (error) {
         console.log(error)
@@ -88,19 +89,18 @@ export const getMe = createAsyncThunk('auth/meUser', async () => {
 })
 
 
-
 export const forgetPassword = createAsyncThunk(
     'auth/forgetPassword',
     async (username: string) => {
-    try {
-        const { data } = await axios.post('/auth/forget-password', {
-            username,
-        });
-        toast.success(data.message);
-    } catch (err:any) {
-        toast.error(getError(err));
-    }
-});
+        try {
+            const {data} = await axios.post('/auth/forget-password', {
+                username,
+            });
+            toast.success(data.message);
+        } catch (err: any) {
+            toast.error(getError(err));
+        }
+    });
 
 export const resetPassword = createAsyncThunk(
     'auth/resetPassword',
@@ -109,7 +109,7 @@ export const resetPassword = createAsyncThunk(
             return;
         }
         try {
-          const {data} = await axios.post('/auth/reset-password', {
+            const {data} = await axios.post('/auth/reset-password', {
                 password,
                 token,
             });
@@ -118,8 +118,6 @@ export const resetPassword = createAsyncThunk(
             toast.error(getError(err));
         }
     });
-
-
 
 
 const authSlice = createSlice({
@@ -136,28 +134,27 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             // Register
-            .addCase(registerUser.pending,(state ) => {
-            state.isLoading = true
-            state.status = null
-        })
-            .addCase(registerUser.fulfilled, (state, action ) => {
-             state.isLoading = false
-            state.status = action.payload.message
-            state.user = action.payload.user
-            state.token = action.payload.token
-
-        })
-            .addCase(registerUser.rejected, (state, action) => {
-            state.isLoading = false
-                // @ts-ignore
-                state.status = action.payload.message
-        })
-        // Login
-            .addCase(loginUser.pending,(state ) => {
+            .addCase(registerUser.pending, (state) => {
                 state.isLoading = true
                 state.status = null
             })
-            .addCase(loginUser.fulfilled, (state, action ) => {
+            .addCase(registerUser.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.status = action.payload.message
+                state.user = action.payload.user
+                state.token = action.payload.token
+
+            })
+            .addCase(registerUser.rejected, (state, action) => {
+                state.isLoading = false
+
+            })
+            // Login
+            .addCase(loginUser.pending, (state) => {
+                state.isLoading = true
+                state.status = null
+            })
+            .addCase(loginUser.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.status = action.payload.message
                 state.user = action.payload.user
@@ -166,15 +163,14 @@ const authSlice = createSlice({
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.isLoading = false
-                // @ts-ignore
-                state.status = action.payload.message
+
             })
-        // Check auth
-            .addCase(getMe.pending,(state ) => {
+            // Check auth
+            .addCase(getMe.pending, (state) => {
                 state.isLoading = true
                 state.status = null
             })
-            .addCase(getMe.fulfilled, (state, action ) => {
+            .addCase(getMe.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.status = null
                 state.user = action.payload?.user
@@ -183,8 +179,7 @@ const authSlice = createSlice({
             })
             .addCase(getMe.rejected, (state, action) => {
                 state.isLoading = false
-                // @ts-ignore
-                state.status = action.payload.message
+
             })
     }
 })
@@ -192,6 +187,6 @@ const authSlice = createSlice({
 
 export const checkIsAuth = (state: StateType) => Boolean(state.auth.token)
 export const checkIsDriver = (state: StateType) => Boolean(state.auth.user?.car)
-export const { logout } = authSlice.actions
+export const {logout} = authSlice.actions
 
 export const authReducer = authSlice.reducer

@@ -8,7 +8,7 @@ import {dropState, fetchTrips} from "../../redux/features/trips/tripsSlice";
 import {useSelector} from "react-redux";
 import {StateType} from "../../redux/store";
 import Trip from "../../components/Trip/Trip";
-import Info, {InfoPropsType} from "../../components/Info/Info";
+import Info from "../../components/Info/Info";
 import icon1 from '../../assets/images/icon1.svg'
 import icon2 from '../../assets/images/icon2.svg'
 import icon3 from '../../assets/images/icon3.svg'

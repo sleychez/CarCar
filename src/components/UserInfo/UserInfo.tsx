@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 
 import style from "../Trip/Trip.module.css";
-import {Items} from "../../redux/features/trips/tripsSlice";
 import {UserType} from "../../redux/features/auth/authSlice";
 
 
